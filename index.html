@@ -10,13 +10,22 @@
 </head>
 
 <body>
-  <div class="container">
-    <h1>Workout Logger</h1>
+  <section class="container">
+    <header>
+      <h1>Workout Logger</h1>
+    </header>
 
-    <div class="window active-window" id="logWindow">
+    <!-- Logging Window -->
+    <section class="window active-window" id="logWindow">
+
+      <!-- Arrow LEFT -->
+      <div class="navigation navigation-left" onclick="toggleWindow('logWindow', 'createWindow')">&larr;</div>
+
+      <!-- Exercise selection -->
       <div class="form-group">
         <label for="exercise">Exercise:</label>
         <select id="exercise" placeholder="Select exercise">
+          <!-- add function that will render this options from list -->
           <option value>Select exercise</option>
           <option value="exercise1">Exercise 1</option>
           <option value="exercise2">Exercise 2</option>
@@ -24,21 +33,25 @@
         </select>
       </div>
 
+      <!-- Number of Reps -->
       <div class="form-group">
         <label for="reps">Reps:</label>
         <input type="number" id="reps" placeholder="Enter number of reps" />
       </div>
 
+      <!-- Number of Sets -->
       <div class="form-group">
         <label for="sets">Sets:</label>
         <input type="number" id="sets" placeholder="Enter number of sets" />
       </div>
 
+      <!-- Maximal Weight -->
       <div class="form-group">
         <label for="weight">Weight (kg):</label>
         <input type="number" id="weight" placeholder="Enter weight in kg" />
       </div>
 
+      <!-- Log button -->
       <div class="form-group">
         <button onclick="logWorkout()">Log Workout</button>
       </div>
@@ -58,10 +71,10 @@
       <div class="navigation navigation-right" onclick="toggleWindow('logWindow', 'statsWindow')">
         &rarr;
       </div>
-    </div>
+    </section>
 
     <!-- New createWindow -->
-    <div class="window" id="createWindow">
+    <section class="window" id="createWindow">
       <div class="form-group">
         <label for="workoutName">Workout Name:</label>
         <input type="text" id="workoutName" placeholder="Enter workout name" />
@@ -104,15 +117,18 @@
         <tbody id="workoutTableBody"></tbody>
       </table>
 
-      <div class="navigation navigation-right" onclick="toggleWindow('createWindow', 'statsWindow')">
-        &rarr;
-      </div>
-    </div>
+      <!-- Arrow RIGHT -->
+      <div class="navigation navigation-right" onclick="toggleWindow('createWindow', 'logWindow')">&rarr;</div>
+    </section>
 
-    <div class="window" id="statsWindow">
+    <!-- Statistics Window -->
+    <section class="window" id="statsWindow">
+
+      <!-- Exercise Selection -->
       <div class="form-group">
         <label for="exerciseStats">Exercise:</label>
         <select id="exerciseStats" onchange="updateChart()">
+          <!-- add function that will render this options from list -->
           <option value>Select exercise</option>
           <option value="exercise1">Exercise 1</option>
           <option value="exercise2">Exercise 2</option>
@@ -122,11 +138,10 @@
 
       <canvas id="chartContainer"></canvas>
 
-      <div class="navigation navigation-left" onclick="toggleWindow('statsWindow', 'logWindow')">
-        &larr;
-      </div>
-    </div>
-  </div>
+      <!-- Arrow LEFT -->
+      <div class="navigation navigation-left" onclick="toggleWindow('statsWindow', 'logWindow')">&larr;</div>
+    </section>
+  </section>
 
   <script src="functions.js"></script>
 </body>
