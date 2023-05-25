@@ -19,7 +19,7 @@
     <section class="window active-window" id="logWindow">
 
       <!-- Arrow LEFT -->
-      <div class="navigation navigation-left" onclick="toggleWindow('logWindow', 'createWindow')">&larr;</div>
+      <div class="arrow arrow-left" onclick="toggleWindow('logWindow', 'createWindow')"></div>
 
       <!-- Exercise selection -->
       <div class="form-group">
@@ -68,9 +68,7 @@
         <tbody id="workoutTableBody"></tbody>
       </table>
 
-      <div class="navigation navigation-right" onclick="toggleWindow('logWindow', 'statsWindow')">
-        &rarr;
-      </div>
+      <div class="arrow arrow-right" onclick="toggleWindow('logWindow', 'statsWindow')"></div>
     </section>
 
     <!-- New createWindow -->
@@ -118,7 +116,7 @@
       </table>
 
       <!-- Arrow RIGHT -->
-      <div class="navigation navigation-right" onclick="toggleWindow('createWindow', 'logWindow')">&rarr;</div>
+      <div class="arrow arrow-right" onclick="toggleWindow('createWindow', 'logWindow')"></div>
     </section>
 
     <!-- Statistics Window -->
@@ -139,7 +137,7 @@
       <canvas id="chartContainer"></canvas>
 
       <!-- Arrow LEFT -->
-      <div class="navigation navigation-left" onclick="toggleWindow('statsWindow', 'logWindow')">&larr;</div>
+      <div class="arrow arrow-left" onclick="toggleWindow('statsWindow', 'logWindow')"></div>
     </section>
   </section>
 
