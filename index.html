@@ -134,6 +134,13 @@
     <!-- Statistics Window -->
     <section class="window" id="statsWindow">
 
+      <!-- Arrow LEFT -->
+      <div class="arrow arrow-left" onclick="toggleWindow('statsWindow', 'logWindow')">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
       <!-- Exercise Selection -->
       <div class="form-group">
         <label for="exerciseStats">Exercise:</label>
@@ -146,14 +153,9 @@
         </select>
       </div>
 
+
       <canvas id="chartContainer"></canvas>
 
-      <!-- Arrow LEFT -->
-      <div class="arrow arrow-left" onclick="toggleWindow('statsWindow', 'logWindow')">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
     </section>
   </section>
 
