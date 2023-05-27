@@ -102,6 +102,13 @@ h1 {
   color: #333;
 }
 
+
+.form-group .warning {
+    color: rgba(215, 18, 18, 0.731);
+    display: block;
+    font-size: 0.6rem;
+}
+
 .form-group input[type="text"],
 .form-group input[type="number"],
 .form-group select {

@@ -29,9 +29,12 @@ function createSelectOptions(exercises, select) {
 
 }
 
+// create select option for log workout window
 const selectLog = document.getElementById("exercise");
-const selectStats = document.getElementById("exerciseStats");
 createSelectOptions(exercises, selectLog);
+
+// create select option for stats window
+const selectStats = document.getElementById("exerciseStats");
 createSelectOptions(exercises, selectStats);
 
 class State {
@@ -71,33 +74,81 @@ const exerciseData = new State([
     { name: "Biceps curls", date: new Date(), weight: 15 },
 ]);
 
-function logWorkout() {
-    var exercise = document.getElementById("exercise").value;
-    var reps = document.getElementById("reps").value;
-    var sets = document.getElementById("sets").value;
-    var weight = document.getElementById("weight").value;
+
+function resetWarnings() {
+    const elements = document.getElementsByClassName("warning");
+    for (const e of elements) {
+        e.remove();
+    }
+}
+
+function createWarningLabel(el, message) {
+    
+    if (el.nextSibling != null && el.nextSibling.className == "warning") {
+        return;
+    }
+    
+    const w = document.createElement("label");
+    w.className = "warning";
+    w.innerText = message;
+    el.after(w);
+}
+
+function logWorkout(event) {
+
+    // prevent submission
+    event.preventDefault();
+
+    // reset warning of invalid input
+    resetWarnings();
+
+    // get form values and check validity
+    const exerciseEl = document.getElementById("exercise");
+    const exercise = exerciseEl.value;
+    if (exercise == "") {
+        createWarningLabel(exerciseEl, "Select exercise!")
+        return;
+    }
+    const repsEl = document.getElementById("reps");
+    const reps = document.getElementById("reps").value;
+    if (reps <=0 ) {
+        createWarningLabel(repsEl, "Choose number greater than 0!");
+        return;
+    }
+    const setsEl = document.getElementById("sets");
+    const sets = document.getElementById("sets").value;
+    if (sets <=0 ) {
+        createWarningLabel(setsEl, "Choose number greater than 0!");
+        return;
+    }
+    const weightEl = document.getElementById("weight");
+    const weight = document.getElementById("weight").value;
+    if (weight <=0 ) {
+        createWarningLabel(weightEl, "Choose number greater than 0!");
+        return;
+    }
 
     // new row
-    var tableBody = document.getElementById("workoutTableBody");
-    var newRow = tableBody.insertRow();
+    const tableBody = document.getElementById("workoutTableBody");
+    const newRow = tableBody.insertRow();
 
     // new cell for name
-    var exerciseCell = newRow.insertCell();
+    const exerciseCell = newRow.insertCell();
     exerciseCell.textContent = exercise;
 
     // new cell for row
-    var repsCell = newRow.insertCell();
+    const repsCell = newRow.insertCell();
     repsCell.textContent = reps;
 
     // new cell for set
-    var setsCell = newRow.insertCell();
+    const setsCell = newRow.insertCell();
     setsCell.textContent = sets;
 
     // new cell for weight
-    var weightCell = newRow.insertCell();
+    const weightCell = newRow.insertCell();
     weightCell.textContent = weight;
 
-    let newExercise = {
+    const newExercise = {
         name: exercise,
         date: new Date(),
         weight: parseFloat(weight),

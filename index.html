@@ -2,156 +2,160 @@
 <html>
 
 <head>
-  <title>Workout Logger</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <title>Workout Logger</title>
+    <link rel="stylesheet" href="style.css">
 
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script> -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
-  <section class="container">
-    <header>
-      <h1>Workout Logger</h1>
-    </header>
+    <section class="container">
+        <header>
+        <h1>Workout Logger</h1>
+        </header>
 
-    <!-- Logging Window -->
-    <section class="window active-window" id="logWindow">
+        <!-- Logging Window -->
+        <section class="window active-window" id="logWindow">
 
-      <!-- Arrow LEFT -->
-      <div class="arrow arrow-left" onclick="toggleWindow('logWindow', 'createWindow')">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+            <!-- Arrow LEFT -->
+            <div class="arrow arrow-left" onclick="toggleWindow('logWindow', 'createWindow')">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
 
-      <!-- Exercise selection -->
-      <div class="form-group">
-        <label for="exercise">Exercise:</label>
-        <select id="exercise" placeholder="Select exercise">
-          <!-- add function that will render these options from list -->
-        </select>
-      </div>
+            <form action="" id="logExercise">
+                <!-- Exercise selection -->
+                <div class="form-group">
+                    <label for="exercise">Exercise:</label>
+                    <select id="exercise" placeholder="Select exercise" autofocus>
+                    <!-- add function that will render these options from list -->
+                    </select>
+                </div>
+    
+                <!-- Number of Reps -->
+                <div class="form-group">
+                    <label for="reps">Reps:</label>
+                    <input type="number" id="reps" placeholder="Enter number of reps"/>
+                </div>
+    
+                <!-- Number of Sets -->
+                <div class="form-group">
+                    <label for="sets">Sets:</label>
+                    <input type="number" id="sets" placeholder="Enter number of sets" />
+                </div>
+    
+                <!-- Maximal Weight -->
+                <div class="form-group">
+                    <label for="weight">Weight (kg):</label>
+                    <input type="number" id="weight" placeholder="Enter weight in kg" />
+                </div>
+    
+                <!-- Log button -->
+                <div class="form-group">
+                    <button onclick="logWorkout(event)">Log Workout</button>
+                </div>
+            </form>
 
-      <!-- Number of Reps -->
-      <div class="form-group">
-        <label for="reps">Reps:</label>
-        <input type="number" id="reps" placeholder="Enter number of reps" />
-      </div>
 
-      <!-- Number of Sets -->
-      <div class="form-group">
-        <label for="sets">Sets:</label>
-        <input type="number" id="sets" placeholder="Enter number of sets" />
-      </div>
+            <table class="workout-table">
+                <thead>
+                <tr>
+                    <th>Exercise</th>
+                    <th>Reps</th>
+                    <th>Sets</th>
+                    <th>Weight (kg)</th>
+                </tr>
+                </thead>
+                <tbody id="workoutTableBody"></tbody>
+            </table>
 
-      <!-- Maximal Weight -->
-      <div class="form-group">
-        <label for="weight">Weight (kg):</label>
-        <input type="number" id="weight" placeholder="Enter weight in kg" />
-      </div>
+            <div class="arrow arrow-right" onclick="toggleWindow('logWindow', 'statsWindow')">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </section>
 
-      <!-- Log button -->
-      <div class="form-group">
-        <button onclick="logWorkout()">Log Workout</button>
-      </div>
+        <!-- New createWindow -->
+        <section class="window" id="createWindow">
+            <div class="form-group">
+                <label for="workoutName">Workout Name:</label>
+                <input type="text" id="workoutName" placeholder="Enter workout name" />
+            </div>
 
-      <table class="workout-table">
-        <thead>
-          <tr>
-            <th>Exercise</th>
-            <th>Reps</th>
-            <th>Sets</th>
-            <th>Weight (kg)</th>
-          </tr>
-        </thead>
-        <tbody id="workoutTableBody"></tbody>
-      </table>
+            <div class="form-group">
+                <label for="exerciseName">Exercise Name:</label>
+                <input type="text" id="exerciseName" placeholder="Enter exercise name" />
+            </div>
 
-      <div class="arrow arrow-right" onclick="toggleWindow('logWindow', 'statsWindow')">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+            <div class="form-group">
+                <label for="exerciseSets">Sets:</label>
+                <input type="number" id="exerciseSets" placeholder="Enter number of sets" />
+            </div>
+
+            <div class="form-group">
+                <label for="exerciseReps">Reps:</label>
+                <input type="number" id="exerciseReps" placeholder="Enter number of reps" />
+            </div>
+
+            <div class="form-group">
+                <label for="exercisePR">Percentage of Max PR:</label>
+                <input type="number" id="exercisePR" placeholder="Enter percentage of max PR" />
+            </div>
+
+            <div class="form-group">
+                <button onclick="createWorkout()">Create Workout</button>
+            </div>
+
+            <table class="workout-table">
+                <thead>
+                <tr>
+                    <th>Workout Name</th>
+                    <th>Exercise Name</th>
+                    <th>Sets</th>
+                    <th>Reps</th>
+                    <th>Percentage of Max PR</th>
+                </tr>
+                </thead>
+                <tbody id="workoutTableBody"></tbody>
+            </table>
+
+            <!-- Arrow RIGHT -->
+            <div class="arrow arrow-right" onclick="toggleWindow('createWindow', 'logWindow')">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </section>
+
+        <!-- Statistics Window -->
+        <section class="window" id="statsWindow">
+
+            <!-- Arrow LEFT -->
+            <div class="arrow arrow-left" onclick="toggleWindow('statsWindow', 'logWindow')">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <!-- Exercise Selection -->
+            <div class="form-group">
+                <label for="exerciseStats">Exercise:</label>
+                <select id="exerciseStats" onchange="updateChart()">
+                <!-- add function that will render these options from list -->
+                </select>
+            </div>
+
+        </section>
     </section>
 
-    <!-- New createWindow -->
-    <section class="window" id="createWindow">
-      <div class="form-group">
-        <label for="workoutName">Workout Name:</label>
-        <input type="text" id="workoutName" placeholder="Enter workout name" />
-      </div>
+    <script src="functions.js">
 
-      <div class="form-group">
-        <label for="exerciseName">Exercise Name:</label>
-        <input type="text" id="exerciseName" placeholder="Enter exercise name" />
-      </div>
-
-      <div class="form-group">
-        <label for="exerciseSets">Sets:</label>
-        <input type="number" id="exerciseSets" placeholder="Enter number of sets" />
-      </div>
-
-      <div class="form-group">
-        <label for="exerciseReps">Reps:</label>
-        <input type="number" id="exerciseReps" placeholder="Enter number of reps" />
-      </div>
-
-      <div class="form-group">
-        <label for="exercisePR">Percentage of Max PR:</label>
-        <input type="number" id="exercisePR" placeholder="Enter percentage of max PR" />
-      </div>
-
-      <div class="form-group">
-        <button onclick="createWorkout()">Create Workout</button>
-      </div>
-
-      <table class="workout-table">
-        <thead>
-          <tr>
-            <th>Workout Name</th>
-            <th>Exercise Name</th>
-            <th>Sets</th>
-            <th>Reps</th>
-            <th>Percentage of Max PR</th>
-          </tr>
-        </thead>
-        <tbody id="workoutTableBody"></tbody>
-      </table>
-
-      <!-- Arrow RIGHT -->
-      <div class="arrow arrow-right" onclick="toggleWindow('createWindow', 'logWindow')">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </section>
-
-    <!-- Statistics Window -->
-    <section class="window" id="statsWindow">
-
-      <!-- Arrow LEFT -->
-      <div class="arrow arrow-left" onclick="toggleWindow('statsWindow', 'logWindow')">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-
-      <!-- Exercise Selection -->
-      <div class="form-group">
-        <label for="exerciseStats">Exercise:</label>
-        <select id="exerciseStats" onchange="updateChart()">
-          <!-- add function that will render these options from list -->
-        </select>
-      </div>
-
-    </section>
-  </section>
-
-  <script src="functions.js">
-
-        
-  </script>
+            
+    </script>
 </body>
 
 </html>
