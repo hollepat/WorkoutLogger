@@ -1,0 +1,41 @@
+#workout-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.workout {
+    background-color: #f0f0f0;
+    padding: 0.1rem 0.6rem 0.1rem 0.6rem;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+  
+  .workout-header {
+    font-weight: bold;
+  }
+  
+  .workout-content {
+    display: none;
+    padding-left: 20px;
+  }
+  
+  .exercise {
+    margin-bottom: 5px;
+  }
+  
+  .sets-reps {
+    font-style: italic;
+    color: #888;
+  }
+  
+  #add-workout-row {
+    background-color: #ccc;
+    padding: 10px;
+    cursor: pointer;
+  }

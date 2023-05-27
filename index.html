@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workout Logger</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="workouts.css">
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -84,48 +85,45 @@
         <!-- New createWindow -->
         <section class="window" id="createWindow">
             <h2>Your Routines!</h2>
-
-            <div class="form-group">
-                <label for="workoutName">Workout Name:</label>
-                <input type="text" id="workoutName" placeholder="Enter workout name" />
+            
+            <div id="workout-container">
             </div>
 
-            <div class="form-group">
-                <label for="exerciseName">Exercise Name:</label>
-                <input type="text" id="exerciseName" placeholder="Enter exercise name" />
+            <div class="workout">
+                <button>Create Workout</button>
             </div>
 
-            <div class="form-group">
-                <label for="exerciseSets">Sets:</label>
-                <input type="number" id="exerciseSets" placeholder="Enter number of sets" />
-            </div>
+            <!-- <form>
 
-            <div class="form-group">
-                <label for="exerciseReps">Reps:</label>
-                <input type="number" id="exerciseReps" placeholder="Enter number of reps" />
-            </div>
-
-            <div class="form-group">
-                <label for="exercisePR">Percentage of Max PR:</label>
-                <input type="number" id="exercisePR" placeholder="Enter percentage of max PR" />
-            </div>
-
-            <div class="form-group">
-                <button onclick="createWorkout()">Create Workout</button>
-            </div>
-
-            <table class="workout-table">
-                <thead>
-                <tr>
-                    <th>Workout Name</th>
-                    <th>Exercise Name</th>
-                    <th>Sets</th>
-                    <th>Reps</th>
-                    <th>Percentage of Max PR</th>
-                </tr>
-                </thead>
-                <tbody id="workoutTableBody"></tbody>
-            </table>
+                <div class="form-group">
+                    <label for="workoutName">Workout Name:</label>
+                    <input type="text" id="workoutName" placeholder="Enter workout name" />
+                </div>
+    
+                <div class="form-group">
+                    <label for="exerciseName">Exercise Name:</label>
+                    <input type="text" id="exerciseName" placeholder="Enter exercise name" />
+                </div>
+    
+                <div class="form-group">
+                    <label for="exerciseSets">Sets:</label>
+                    <input type="number" id="exerciseSets" placeholder="Enter number of sets" />
+                </div>
+    
+                <div class="form-group">
+                    <label for="exerciseReps">Reps:</label>
+                    <input type="number" id="exerciseReps" placeholder="Enter number of reps" />
+                </div>
+    
+                <div class="form-group">
+                    <label for="exercisePR">Percentage of Max PR:</label>
+                    <input type="number" id="exercisePR" placeholder="Enter percentage of max PR" />
+                </div>
+    
+                <div class="form-group">
+                    <button onclick="createWorkout()">Create Workout</button>
+                </div>
+            </form> -->
 
             <!-- Arrow RIGHT -->
             <div class="arrow arrow-right" onclick="toggleWindow('createWindow', 'logWindow')">
@@ -156,10 +154,9 @@
         </section>
     </section>
 
-    <script src="functions.js">
-
-            
-    </script>
+    <!-- javascript logic -->
+    <script src="main.js"></script>
+    <script src="workouts.js"></script>
 </body>
 
 </html>

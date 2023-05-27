@@ -1,4 +1,5 @@
 
+// exercises for options
 const exercises = [
     "Benchpress",
     "Deadlift",
@@ -8,6 +9,7 @@ const exercises = [
     "Biceps curls",
     "Hammer curls"
 ];
+
 
 function createSelectOptions(exercises, select) {
 
