@@ -25,6 +25,19 @@ body {
   position: relative;
 }
 
+h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 0;
+    color: #333;
+}
+
+h2 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #4caf50;;
+}
+
 .window {
   display: none;
 }
@@ -87,21 +100,18 @@ body {
 
 
 
-h1 {
-  text-align: center;
-  margin-top: 0;
-  color: #333;
-}
+
 
 .form-group {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #333;
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
 }
 
 
@@ -126,14 +136,26 @@ h1 {
 
 .form-group button {
   display: block;
+  font-weight: 700;
   width: 100%;
   padding: 8px;
   background-color: #4caf50;
   color: #fff;
-  border: none;
+  border: 1px solid #fff;
   border-radius: 4px;
   cursor: pointer;
 }
+
+.form-group button:hover {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    background-color: #ffff;
+    color: #4caf50;
+    border: 1px solid #4caf50;
+    border-radius: 4px;
+    cursor: pointer;
+  }
 
 .workout-table {
   margin-top: 20px;
