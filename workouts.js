@@ -44,6 +44,8 @@ function createWorkout(name, exercises) {
 
     }
 
+    contentEl.style.display = 'none'
+
     container.appendChild(workoutEl)
 }
 
