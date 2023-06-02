@@ -161,32 +161,6 @@ function logWorkout(event) {
     updateChart();
 }
 
-function createWorkout() {
-    var workoutName = document.getElementById("workoutName").value;
-    var exerciseName = document.getElementById("exerciseName").value;
-    var exerciseSets = document.getElementById("exerciseSets").value;
-    var exerciseReps = document.getElementById("exerciseReps").value;
-    var exercisePR = document.getElementById("exercisePR").value;
-
-    var tableBody = document.getElementById("workoutTableBody");
-    var newRow = tableBody.insertRow();
-
-    var workoutNameCell = newRow.insertCell();
-    workoutNameCell.textContent = workoutName;
-
-    var exerciseNameCell = newRow.insertCell();
-    exerciseNameCell.textContent = exerciseName;
-
-    var setsCell = newRow.insertCell();
-    setsCell.textContent = exerciseSets;
-
-    var repsCell = newRow.insertCell();
-    repsCell.textContent = exerciseReps;
-
-    var prCell = newRow.insertCell();
-    prCell.textContent = exercisePR;
-}
-
 // swithc current window
 function toggleWindow(currentWindow, nextWindow) {
     var current = document.getElementById(currentWindow);
