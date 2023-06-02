@@ -89,41 +89,14 @@
             <div id="workout-container">
             </div>
 
-            <div class="workout">
-                <button>Create Workout</button>
-            </div>
-
-            <!-- <form>
-
-                <div class="form-group">
-                    <label for="workoutName">Workout Name:</label>
-                    <input type="text" id="workoutName" placeholder="Enter workout name" />
-                </div>
-    
-                <div class="form-group">
-                    <label for="exerciseName">Exercise Name:</label>
-                    <input type="text" id="exerciseName" placeholder="Enter exercise name" />
-                </div>
-    
-                <div class="form-group">
-                    <label for="exerciseSets">Sets:</label>
-                    <input type="number" id="exerciseSets" placeholder="Enter number of sets" />
-                </div>
-    
-                <div class="form-group">
-                    <label for="exerciseReps">Reps:</label>
-                    <input type="number" id="exerciseReps" placeholder="Enter number of reps" />
-                </div>
-    
-                <div class="form-group">
-                    <label for="exercisePR">Percentage of Max PR:</label>
-                    <input type="number" id="exercisePR" placeholder="Enter percentage of max PR" />
-                </div>
-    
-                <div class="form-group">
-                    <button onclick="createWorkout()">Create Workout</button>
-                </div>
-            </form> -->
+            <button onclick="addWorkoutRow()">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="30px" height="30px" fill-rule="nonzero"><g fill="#4caf50" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                    <g transform="scale(8.53333,8.53333)">
+                        <path d="M15,3c-6.627,0 -12,5.373 -12,12c0,6.627 5.373,12 12,12c6.627,0 12,-5.373 12,-12c0,-6.627 -5.373,-12 -12,-12zM21,16h-5v5c0,0.553 -0.448,1 -1,1c-0.552,0 -1,-0.447 -1,-1v-5h-5c-0.552,0 -1,-0.447 -1,-1c0,-0.553 0.448,-1 1,-1h5v-5c0,-0.553 0.448,-1 1,-1c0.552,0 1,0.447 1,1v5h5c0.552,0 1,0.447 1,1c0,0.553 -0.448,1 -1,1z"></path>
+                    </g></g>
+                </svg>
+                Create Workout
+            </button>
 
             <!-- Arrow RIGHT -->
             <div class="arrow arrow-right" onclick="toggleWindow('createWindow', 'logWindow')">
@@ -147,12 +120,16 @@
             <div class="form-group">
                 <label for="exerciseStats">Exercise:</label>
                 <select id="exerciseStats" onchange="updateChart()">
-                <!-- add function that will render these options from list -->
+                <!-- options are rendered using js -->
                 </select>
             </div>
 
         </section>
     </section>
+
+    <footer>
+        <p>Created by Patrik Holler</p>
+    </footer>
 
     <!-- javascript logic -->
     <script src="main.js"></script>

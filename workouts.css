@@ -6,36 +6,68 @@
 .workout {
     background-color: #f0f0f0;
     padding: 0.1rem 0.6rem 0.1rem 0.6rem;
-    margin-bottom: 10px;
+    margin: 0px 0px 10px 0px;
     border-radius: 5px;
     cursor: pointer;
-  }
+}
 
-  h3 {
+h3 {
     margin: 0;
     font-size: 1.3rem;
-  }
+    color: #333;
+}
   
-  .workout-header {
+.workout-header {
     font-weight: bold;
-  }
+}
   
-  .workout-content {
+.workout-content {
     display: none;
     padding-left: 20px;
-  }
+}
   
-  .exercise {
+.exercise {
     margin-bottom: 5px;
-  }
+}
   
-  .sets-reps {
+.sets-reps {
     font-style: italic;
     color: #888;
-  }
+}
   
-  #add-workout-row {
+#add-workout-row {
     background-color: #ccc;
     padding: 10px;
     cursor: pointer;
-  }
+}
+
+#createWindow button {
+    background-color: #f0f0f0;
+    border: none;
+    box-shadow: none;
+    padding: 0.2rem 0.6rem 0.2rem 0.6rem;
+    margin: 0px 0px 10px 0px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+
+    display: flex;
+    text-align: center;
+    align-items: center;
+
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333;
+}
+
+#createWindow button svg {
+    width: 2rem;
+    height: 2rem;
+    padding-right: 5px;
+}
+
+#createWindow button strong {
+    width: 5rem;
+    height: 5rem;
+}
+

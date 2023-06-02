@@ -1,6 +1,8 @@
 
 let cnt = 0
 
+
+// create workout in Workout logger screen
 function createWorkout(name, exercises) {
     
     // get container
@@ -45,12 +47,14 @@ function createWorkout(name, exercises) {
     container.appendChild(workoutEl)
 }
 
+// workout session -- testing
 let exerciseName1 = 'Legs';
 let exercisesList1 = [
     {exercise: 'Squat', reps: 6, sets: 5},
     {exercise: 'Bulgarian Split Squat', reps: 6, sets: 5}
 ]
 
+// workout session -- testing
 let exerciseName2 = 'Arms';
 let exercisesList2 = [
     {exercise: 'Biceps Curls', reps: 6, sets: 5},
