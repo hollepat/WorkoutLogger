@@ -190,6 +190,9 @@ footer {
 	text-align: center;
 }
 
-@media (min-width:700px) {
+@media (max-width:700px) {
     
+    .container {
+        max-width: 70%;
+    }
 }
