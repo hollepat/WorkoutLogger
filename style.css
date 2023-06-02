@@ -68,8 +68,8 @@ h2 {
   display: block;
   border: solid #333;;
   border-width: 0 5px 5px 0;
-  width: 1vw;
-  height: 1vw;
+  width: 1rem;
+  height: 1rem;
   transform: rotate(45deg);
   margin: -10px;
   animation: animate 3s infinite;
@@ -97,9 +97,6 @@ h2 {
       transform: rotate(45deg) translate(20px, 20px);
   }
 }
-
-
-
 
 
 .form-group {
@@ -184,3 +181,6 @@ h2 {
   height: 300px;
 }
 
+@media (min-width:700px) {
+    
+}
