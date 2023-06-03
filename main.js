@@ -10,8 +10,8 @@ const exercises = [
     "Hammer curls"
 ];
 
-
-function createSelectOptions(exercises, select) {
+// create opitons for specific select
+function createSelectOption(exercises, select) {
 
     // place holder option
     let o = document.createElement("option");
@@ -31,13 +31,16 @@ function createSelectOptions(exercises, select) {
 
 }
 
-// create select option for log workout window
-const selectLog = document.getElementById("exercise");
-createSelectOptions(exercises, selectLog);
+// create options for all selects regarding choosing exercise
+function createSelectOptions(exercises) {
 
-// create select option for stats window
-const selectStats = document.getElementById("exerciseStats");
-createSelectOptions(exercises, selectStats);
+    const selectEl = document.getElementsByClassName("exercises");
+    for (const el of selectEl) {
+        createSelectOption(exercises, el);
+    }
+}
+
+createSelectOptions(exercises);
 
 class State {
     #exercises;
@@ -76,7 +79,7 @@ const exerciseData = new State([
     { name: "Biceps curls", date: new Date(), weight: 15 },
 ]);
 
-
+// hide warning
 function resetWarnings() {
     const elements = document.getElementsByClassName("warning");
     for (const e of elements) {
@@ -84,6 +87,7 @@ function resetWarnings() {
     }
 }
 
+// show warning
 function createWarningLabel(el, message) {
     
     if (el.nextSibling != null && el.nextSibling.className == "warning") {
@@ -96,6 +100,7 @@ function createWarningLabel(el, message) {
     el.after(w);
 }
 
+// log workout
 function logWorkout(event) {
 
     // prevent submission

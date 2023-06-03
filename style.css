@@ -26,6 +26,7 @@ body {
   box-shadow: 0.1rem 0.2rem 0.5rem 0.2rem rgba(0, 0, 0, 0.327);
   border-radius: 0.6rem;
   position: relative;
+  z-index: 0;
 }
 
 h1 {
@@ -185,13 +186,173 @@ h2 {
     height: 300px;
 }
 
+
+#workout-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.workout {
+    background-color: #f0f0f0;
+    padding: 0.1rem 0.6rem 0.1rem 0.6rem;
+    margin: 0px 0px 10px 0px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: #333;
+    text-transform: uppercase;
+}
+  
+.workout-header {
+    font-weight: bold;
+}
+  
+.workout-content {
+    display: none;
+    padding-left: 20px;
+}
+  
+.exercise {
+    margin-bottom: 5px;
+}
+  
+.sets-reps {
+    font-style: italic;
+    color: #888;
+}
+  
+
+#add-workout-button {
+    background-color: #f0f0f0;
+    border: none;
+    box-shadow: none;
+    padding: 0.2rem 0.6rem 0.2rem 0.6rem;
+    margin: 0px 0px 10px 0px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+
+    display: flex;
+    text-align: center;
+    align-items: center;
+
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333;
+}
+
+#createWindow button svg {
+    width: 2rem;
+    height: 2rem;
+    padding-right: 5px;
+}
+
+#createWindow button strong {
+    width: 5rem;
+    height: 5rem;
+}
+
+hr {
+    border: 1px solid #888;
+    border-bottom: none;
+    opacity: 0.2;
+}
+
+#popup-container {
+    display: none;
+    border-radius: 5px;
+    z-index: 1;
+    width: 100%;
+    padding: 1.2rem;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.show-popup {
+    visibility: visible;
+}
+
+.pop-up-button {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    border: solid 1px #f0f0f0;
+    padding: 0.2rem 0.6rem 0.2rem 0.6rem;
+    color:#333;
+    cursor: pointer;
+}
+
+.pop-up-button:hover {
+    border: solid 1px #333;
+}
+
+
+#popup-container > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h4 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 0.4rem;
+}
+
+.close-btn {
+    cursor: pointer;
+  }
+
+
 footer {
-    margin: 65px auto 0;
+    margin: 3.6rem auto 2rem;
 	color: #bfbfbf;
 	font-size: 0.7rem;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 	text-align: center;
 }
+
+.form-group-pop-up label{
+    font-size: 0.7rem;
+    display: block;
+    font-weight: 400;
+    color: #333;
+}
+
+.form-group-pop-up select {
+    padding: 0.4rem;
+    width: 40;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 40%;
+  }
+
+.form-group-pop-up input {
+    font-weight: 500;
+    font-size: .8rem;
+    color: #333;
+    background-color: #fff;
+    border-radius: 0.4rem;
+    box-shadow: 0 0 0 .15rem rgba(6, 7, 7, 0.186);
+    border: none;
+    outline: none;
+    padding: 0.4rem;
+    transition: .4s;
+    margin-bottom: 0.3rem;
+    width: 40%;
+}
+  
+.form-group-pop-up input:hover {
+    box-shadow: 0 0 0 .15vw rgba(135, 207, 235, 0.186);
+}
+  
+.form-group-pop-up input:focus {
+    box-shadow: 0 0 0 .15vw skyblue;
+}
+
 
 @media (max-width:500px) {
     
