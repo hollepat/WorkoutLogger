@@ -346,11 +346,11 @@ footer {
 }
   
 .form-group-pop-up input:hover {
-    box-shadow: 0 0 0 .15vw rgba(135, 207, 235, 0.186);
+    box-shadow: 0 0 0 .15vw rgba(101, 193, 230, 0.632);
 }
   
 .form-group-pop-up input:focus {
-    box-shadow: 0 0 0 .15vw skyblue;
+    box-shadow: 0 0 0 .15vw rgb(101, 193, 230);
 }
 
 
@@ -365,8 +365,14 @@ footer {
     }
 
     .workout-table {
-        font-size: 0.6rem;
+        font-size: 0.7rem;
     }
+
+
+.form-group-pop-up input {
+    box-shadow: none;
+    border: 1px solid rgba(101, 193, 230, 0.632);
+}
 
     
 }
