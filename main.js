@@ -175,6 +175,7 @@ function toggleWindow(currentWindow, nextWindow) {
     next.classList.add("active-window");
 }
 
+// create chart
 function updateChart() {
   // get window for charts
   const window = document.getElementById("statsWindow");

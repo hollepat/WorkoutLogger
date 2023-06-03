@@ -2,27 +2,88 @@
 let cnt = 0
 
 
+
+// WorkoutList class using prototype
+let WorkoutList = function(init) {
+    this._list = init;
+}
+
+WorkoutList.prototype.getWorkoutList = function () {
+    return this._list;
+}
+
+WorkoutList.prototype.addWorkout = function (workout) {
+    this._list.push(workout);
+}
+
+WorkoutList.prototype.removeWorkout = function (workoutName) {
+    let newWorkoutList = this._list.filter((el) => {
+        if (el.nameW === workoutName) { return false }
+        return true
+    })
+    this._list = newWorkoutList;
+}
+
+
+let workoutList = new WorkoutList(
+    [
+        {
+            nameW: 'Legs',
+            exercises : [
+                {exercise: 'Squat', reps: 6, sets: 5},
+                {exercise: 'Bulgarian Split Squat', reps: 6, sets: 5}
+            ]
+        },
+        {
+            nameW: 'Arms',
+            exercises: [
+                {exercise: 'Biceps Curls', reps: 6, sets: 5},
+                {exercise: 'Triceps Extension', reps: 6, sets: 5}
+            ]
+        }
+    ]
+)
+
+createWorkouts(workoutList.getWorkoutList());
+
+
 // create workout in Workout logger screen
-function createWorkouts(workoutList) {
+function createWorkouts(workouts) {
     
     // get container
     const container = document.getElementById("workout-container");
 
     container.innerHTML = '';
 
-    for (const w of workoutList) {
+    for (const w of workouts) {
         // create workout
         const workoutEl = document.createElement('div');
         workoutEl.classList.add("workout");
-        workoutEl.addEventListener('click', (e) => {
-            toggleWorkoutContent(workoutEl);
-        })
 
         // add workout name
         const nameEl = document.createElement('h3');
         nameEl.classList.add("workout-header");
         nameEl.innerText = w.nameW;
-        workoutEl.append(nameEl);
+        nameEl.addEventListener('click', (e) => {
+            toggleWorkoutContent(workoutEl);
+        })
+
+        // delete button
+        const deleteEl = document.createElement('span');
+        deleteEl.classList.add('deleteButton');
+        deleteEl.innerHTML = '<svg class="cross-icon" style="width: 1.8em; height: 1.8em;vertical-align: middle;fill: red;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M810.65984 170.65984q18.3296 0 30.49472 12.16512t12.16512 30.49472q0 18.00192-12.32896 30.33088l-268.67712 268.32896 268.67712 268.32896q12.32896 12.32896 12.32896 30.33088 0 18.3296-12.16512 30.49472t-30.49472 12.16512q-18.00192 0-30.33088-12.32896l-268.32896-268.67712-268.32896 268.67712q-12.32896 12.32896-30.33088 12.32896-18.3296 0-30.49472-12.16512t-12.16512-30.49472q0-18.00192 12.32896-30.33088l268.67712-268.32896-268.67712-268.32896q-12.32896-12.32896-12.32896-30.33088 0-18.3296 12.16512-30.49472t30.49472-12.16512q18.00192 0 30.33088 12.32896l268.32896 268.67712 268.32896-268.67712q12.32896-12.32896 30.33088-12.32896z"  /></svg>';
+        deleteEl.addEventListener('click', (e) => {
+            let workoutName = w.nameW;
+            workoutList.removeWorkout(workoutName);
+            console.log(workoutList);
+            console.log(workoutName);
+            createWorkouts(workoutList.getWorkoutList());
+        });
+        
+        const headerEl = document.createElement('header');
+        headerEl.append(nameEl);
+        headerEl.append(deleteEl);
+        workoutEl.append(headerEl);
 
         // add content div
         const contentEl = document.createElement('div');
@@ -35,7 +96,7 @@ function createWorkouts(workoutList) {
             const exerciseEl = document.createElement('div');
             exerciseEl.className = "workout-exercise"
             exerciseEl.innerText = e.exercise;
-            
+
             // create sets-reps div
             const setsrepsEl = document.createElement('div');
             setsrepsEl.classList.add("sets-reps");
@@ -52,26 +113,6 @@ function createWorkouts(workoutList) {
     }
 }
 
-// state of all workouts
-const workoutsList = [
-    {
-        nameW: 'Legs',
-        exercises : [
-            {exercise: 'Squat', reps: 6, sets: 5},
-            {exercise: 'Bulgarian Split Squat', reps: 6, sets: 5}
-        ]
-    },
-    {
-        nameW: 'Arms',
-        exercises: [
-            {exercise: 'Biceps Curls', reps: 6, sets: 5},
-            {exercise: 'Triceps Extension', reps: 6, sets: 5}
-        ]
-    }
-    
-]
-
-createWorkouts(workoutsList);
 
 
 // display workout content when clicked on title
@@ -100,8 +141,7 @@ function addExercise(event) {
     const exerciseContainer = document.createElement('form');
     exerciseContainer.className = 'exercise-container';
 
-    // Create exercise input element
-
+    // Create exercise input elements
     // exercise select
     const container1 = document.createElement('div');
     container1.classList.add("form-group-pop-up");
@@ -183,8 +223,8 @@ function addExercise(event) {
     const newWorkout = {}
     newWorkout.nameW = nameInput.value;
     newWorkout.exercises = newExerciseList;
-    workoutsList.push(newWorkout)
-    createWorkouts(workoutsList);
+    workoutList.addWorkout(newWorkout);
+    createWorkouts(workoutList.getWorkoutList());
 
     // Close the pop-up
     togglePopUp();
