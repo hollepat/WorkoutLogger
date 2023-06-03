@@ -327,7 +327,7 @@ footer {
     width: 40;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: 40%;
+    width: 70%;
   }
 
 .form-group-pop-up input {
@@ -342,7 +342,7 @@ footer {
     padding: 0.4rem;
     transition: .4s;
     margin-bottom: 0.3rem;
-    width: 40%;
+    width: 70%;
 }
   
 .form-group-pop-up input:hover {
