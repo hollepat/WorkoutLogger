@@ -77,7 +77,8 @@ createSelectOptions(exercises);
 
 // initialized data from local storage
 const initRecords = JSON.parse(localStorage.getItem("records"));
-let exerciseData = new ExerciseRecords( (initRecords === null) ? [] : recreatePrototypes(initRecords._exercises));
+let exerciseData = new ExerciseRecords( (initRecords === null || initRecords._exercises === undefined) ? [] : recreatePrototypes(initRecords._exercises));
+createLogRecords(exerciseData.getExercises('all'));
 console.log(exerciseData.getExercises('all'))
 
 // take data from local storage and recreate Date prototype
@@ -86,7 +87,9 @@ function recreatePrototypes(data) {
         return {
             name: item.name,
             date: new Date(item.date),
-            weight: item.weight
+            weight: item.weight,
+            sets: item.sets,
+            reps: item.reps
         };
     });
 }
@@ -114,6 +117,43 @@ function createWarningLabel(el, message) {
     w.className = "warning";
     w.innerText = message;
     el.after(w);
+}
+
+function createLogRecords(records) {
+    for (const r of records) {
+        console.log(r)
+        addRowToTable(r.name, r.reps, r.sets, r.weight)
+    }
+}
+
+function addRowToTable(exercise, reps, sets, weight) {
+
+    // new row
+    const tableBody = document.getElementById("workoutTableBody");
+    const newRow = tableBody.insertRow();
+
+    // new cell for name
+    const exerciseCell = newRow.insertCell();
+    exerciseCell.textContent = exercise;
+
+    // new cell for row
+    const repsCell = newRow.insertCell();
+    repsCell.textContent = reps;
+
+    // new cell for set
+    const setsCell = newRow.insertCell();
+    setsCell.textContent = sets;
+
+    // new cell for weight
+    const weightCell = newRow.insertCell();
+    weightCell.textContent = weight;
+}
+
+function deleteAllRecords() {
+    exerciseData = new ExerciseRecords([])
+    const tableBody = document.getElementById("workoutTableBody");
+    tableBody.innerHTML = ""
+    saveRecordsToLocalStorage()
 }
 
 // log workout
@@ -151,31 +191,16 @@ function logWorkout(event) {
         return;
     }
 
-    // new row
-    const tableBody = document.getElementById("workoutTableBody");
-    const newRow = tableBody.insertRow();
-
-    // new cell for name
-    const exerciseCell = newRow.insertCell();
-    exerciseCell.textContent = exercise;
-
-    // new cell for row
-    const repsCell = newRow.insertCell();
-    repsCell.textContent = reps;
-
-    // new cell for set
-    const setsCell = newRow.insertCell();
-    setsCell.textContent = sets;
-
-    // new cell for weight
-    const weightCell = newRow.insertCell();
-    weightCell.textContent = weight;
+    // add new row for table
+    addRowToTable(exercise, reps, sets, weight)
 
     // store new exercise record
     const newExercise = {
         name: exercise,
         date: new Date(),
-        weight: parseFloat(weight)
+        weight: parseFloat(weight),
+        sets: sets,
+        reps: reps
     };
     exerciseData.addExercise(newExercise);
 
@@ -226,7 +251,7 @@ function updateChart() {
   chartContainer.style.display = "block";
 
   // create data for chart
-  let labels = data.map((item) => item.date.toLocaleTimeString());
+  let labels = data.map((item) => item.date.toLocaleString());
   let weights = data.map((item) => item.weight);
 
   // get 2d drawing context for canvas

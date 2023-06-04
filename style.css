@@ -214,6 +214,11 @@ h2 {
     width: 2rem;
 }
 
+.logExercise > button {
+    width: 3rem;
+    background-color: #333;
+}
+
 header > h3 {
     margin: 0;
     font-size: 1.3rem;

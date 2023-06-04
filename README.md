@@ -2,7 +2,7 @@
 
 Single web page application of __WorkoutLogger__. App where you can __record__ your __results__ or __plan workouts__.
 
-## How to use!
+## How to use
 
 Main window is for logging your exercises. Once you log your exercise you can see the weights over time in __statistics window__ for each exercise. To get to __statistics window__ press right arrow.
 
