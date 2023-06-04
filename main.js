@@ -7,7 +7,14 @@ const exercises = [
     "Romanian deadlift",
     "Bulgraina split squat",
     "Biceps curls",
-    "Hammer curls"
+    "Hammer curls",
+    "Triceps extension",
+    "French press",
+    "Hack squat",
+    "Smith machine squat",
+    "Push ups",
+    "Pull ups",
+    "Plank"
 ];
 
 // create opitons for specific select
@@ -40,44 +47,53 @@ function createSelectOptions(exercises) {
     }
 }
 
-createSelectOptions(exercises);
 
-class State {
-    #exercises;
-    #filter;
+class ExerciseRecords {
+    _exercises;
+    _filter;
 
     constructor(initExercises) {
-        this.#exercises = initExercises;
+        this._exercises = initExercises;
     }
 
     // arrow function declaration --> takt this from context, do not binf their own this
     addExercise = function (exercise) {
-        this.#exercises.push(exercise);
+        this._exercises.push(exercise);
     };
 
-    // define their own this depending on how they are called
-    setFilter(filter) {
-        this.#filter = filter;
-    }
-
     getExercises = function (filter) {
-        this.#filter = filter;
-        return this.#exercises.filter((exercise) => {
-        if (this.#filter == "all") {
+        this._filter = filter;
+        return this._exercises.filter((exercise) => {
+        if (this._filter == "all") {
             return true;
         } else {
-            return this.#filter == exercise.name;
+            return this._filter == exercise.name;
         }
         });
     };
 }
 
-const exerciseData = new State([
-    { name: "Biceps curls", date: new Date(), weight: 11 },
-    { name: "Benchpress", date: new Date(), weight: 12 },
-    { name: "Benchpress", date: new Date(), weight: 13 },
-    { name: "Biceps curls", date: new Date(), weight: 15 },
-]);
+createSelectOptions(exercises);
+
+// initialized data from local storage
+const initRecords = JSON.parse(localStorage.getItem("records"));
+let exerciseData = new ExerciseRecords( (initRecords === null) ? [] : recreatePrototypes(initRecords._exercises));
+console.log(exerciseData.getExercises('all'))
+
+// take data from local storage and recreate Date prototype
+function recreatePrototypes(data) {
+    return data.map((item) => {
+        return {
+            name: item.name,
+            date: new Date(item.date),
+            weight: item.weight
+        };
+    });
+}
+
+function saveRecordsToLocalStorage() {
+    localStorage.setItem("records", JSON.stringify(exerciseData));
+}
 
 // hide warning
 function resetWarnings() {
@@ -155,14 +171,18 @@ function logWorkout(event) {
     const weightCell = newRow.insertCell();
     weightCell.textContent = weight;
 
+    // store new exercise record
     const newExercise = {
         name: exercise,
         date: new Date(),
-        weight: parseFloat(weight),
+        weight: parseFloat(weight)
     };
-
     exerciseData.addExercise(newExercise);
 
+    // update records in local storage
+    saveRecordsToLocalStorage();
+
+    // update chart
     updateChart();
 }
 

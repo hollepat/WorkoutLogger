@@ -23,7 +23,7 @@ WorkoutList.prototype.removeWorkout = function (workoutName) {
 
 // load from browser's localStorage data
 const initWorkoutList = JSON.parse(localStorage.getItem("workouts"));
-let workoutList = new WorkoutList( (initWorkoutList === null) ? [] : JSON.parse(localStorage.getItem("workouts"))._list);
+let workoutList = new WorkoutList( (initWorkoutList === null) ? [] : initWorkoutList._list);
 createWorkouts(workoutList.getWorkoutList());
 
 function saveWorkoutsToLocalStorage() {
@@ -192,12 +192,12 @@ function addExercise(event) {
         sets.push(input.value);
     });
 
-    // at least name of exercise has to be filled
+    // remove exercises without name --> delete
     exercises = exercises.filter((e) => {
         return e != ""
     })
 
-    // at lest one exercise should be filled
+    // at lest one exercise should be filled and name has to be filled
     if (exercises.length === 0 || nameInput.value == "") { return; }
 
     const newExerciseList = [];
