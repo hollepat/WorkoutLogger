@@ -55,8 +55,6 @@ function createWorkouts(workouts) {
         deleteEl.addEventListener('click', (e) => {
             let workoutName = w.nameW;
             workoutList.removeWorkout(workoutName);
-            console.log(workoutList);
-            console.log(workoutName);
             createWorkouts(workoutList.getWorkoutList());
         });
         

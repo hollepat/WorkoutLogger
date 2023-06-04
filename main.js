@@ -67,7 +67,6 @@ createSelectOptions(exercises);
 const initRecords = JSON.parse(localStorage.getItem("records"));
 let exerciseData = new ExerciseRecords( (initRecords === null || initRecords._exercises === undefined) ? [] : recreatePrototypes(initRecords._exercises));
 createLogRecords(exerciseData.getExercises('all'));
-console.log(exerciseData.getExercises('all'))
 
 // load from browser's localStorage data
 const initWorkoutList = JSON.parse(localStorage.getItem("workouts"));

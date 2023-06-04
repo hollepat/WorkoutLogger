@@ -63,7 +63,6 @@ function createWarningLabel(el, message) {
 
 function createLogRecords(records) {
     for (const r of records) {
-        console.log(r)
         addRowToTable(r.name, r.reps, r.sets, r.weight)
     }
 }
