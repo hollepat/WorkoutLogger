@@ -1,3 +1,4 @@
+//import './statsWindow.js';
 
 // exercises for options
 const exercises = [
@@ -47,170 +48,6 @@ function createSelectOptions(exercises) {
     }
 }
 
-
-class ExerciseRecords {
-    _exercises;
-    _filter;
-
-    constructor(initExercises) {
-        this._exercises = initExercises;
-    }
-
-    // arrow function declaration --> takt this from context, do not binf their own this
-    addExercise = function (exercise) {
-        this._exercises.push(exercise);
-    };
-
-    getExercises = function (filter) {
-        this._filter = filter;
-        return this._exercises.filter((exercise) => {
-        if (this._filter == "all") {
-            return true;
-        } else {
-            return this._filter == exercise.name;
-        }
-        });
-    };
-}
-
-createSelectOptions(exercises);
-
-// initialized data from local storage
-const initRecords = JSON.parse(localStorage.getItem("records"));
-let exerciseData = new ExerciseRecords( (initRecords === null || initRecords._exercises === undefined) ? [] : recreatePrototypes(initRecords._exercises));
-createLogRecords(exerciseData.getExercises('all'));
-console.log(exerciseData.getExercises('all'))
-
-// take data from local storage and recreate Date prototype
-function recreatePrototypes(data) {
-    return data.map((item) => {
-        return {
-            name: item.name,
-            date: new Date(item.date),
-            weight: item.weight,
-            sets: item.sets,
-            reps: item.reps
-        };
-    });
-}
-
-function saveRecordsToLocalStorage() {
-    localStorage.setItem("records", JSON.stringify(exerciseData));
-}
-
-// hide warning
-function resetWarnings() {
-    const elements = document.getElementsByClassName("warning");
-    for (const e of elements) {
-        e.remove();
-    }
-}
-
-// show warning
-function createWarningLabel(el, message) {
-    
-    if (el.nextSibling != null && el.nextSibling.className == "warning") {
-        return;
-    }
-    
-    const w = document.createElement("label");
-    w.className = "warning";
-    w.innerText = message;
-    el.after(w);
-}
-
-function createLogRecords(records) {
-    for (const r of records) {
-        console.log(r)
-        addRowToTable(r.name, r.reps, r.sets, r.weight)
-    }
-}
-
-function addRowToTable(exercise, reps, sets, weight) {
-
-    // new row
-    const tableBody = document.getElementById("workoutTableBody");
-    const newRow = tableBody.insertRow();
-
-    // new cell for name
-    const exerciseCell = newRow.insertCell();
-    exerciseCell.textContent = exercise;
-
-    // new cell for row
-    const repsCell = newRow.insertCell();
-    repsCell.textContent = reps;
-
-    // new cell for set
-    const setsCell = newRow.insertCell();
-    setsCell.textContent = sets;
-
-    // new cell for weight
-    const weightCell = newRow.insertCell();
-    weightCell.textContent = weight;
-}
-
-function deleteAllRecords() {
-    exerciseData = new ExerciseRecords([])
-    const tableBody = document.getElementById("workoutTableBody");
-    tableBody.innerHTML = ""
-    saveRecordsToLocalStorage()
-}
-
-// log workout
-function logWorkout(event) {
-
-    // prevent submission
-    event.preventDefault();
-
-    // reset warning of invalid input
-    resetWarnings();
-
-    // get form values and check validity
-    const exerciseEl = document.getElementById("exercise");
-    const exercise = exerciseEl.value;
-    if (exercise == "") {
-        createWarningLabel(exerciseEl, "Select exercise!")
-        return;
-    }
-    const repsEl = document.getElementById("reps");
-    const reps = document.getElementById("reps").value;
-    if (reps <=0 ) {
-        createWarningLabel(repsEl, "Choose number greater than 0!");
-        return;
-    }
-    const setsEl = document.getElementById("sets");
-    const sets = document.getElementById("sets").value;
-    if (sets <=0 ) {
-        createWarningLabel(setsEl, "Choose number greater than 0!");
-        return;
-    }
-    const weightEl = document.getElementById("weight");
-    const weight = document.getElementById("weight").value;
-    if (weight <=0 ) {
-        createWarningLabel(weightEl, "Choose number greater than 0!");
-        return;
-    }
-
-    // add new row for table
-    addRowToTable(exercise, reps, sets, weight)
-
-    // store new exercise record
-    const newExercise = {
-        name: exercise,
-        date: new Date(),
-        weight: parseFloat(weight),
-        sets: sets,
-        reps: reps
-    };
-    exerciseData.addExercise(newExercise);
-
-    // update records in local storage
-    saveRecordsToLocalStorage();
-
-    // update chart
-    updateChart();
-}
-
 // swithc current window
 function toggleWindow(currentWindow, nextWindow) {
     var current = document.getElementById(currentWindow);
@@ -220,64 +57,22 @@ function toggleWindow(currentWindow, nextWindow) {
     next.classList.add("active-window");
 }
 
-// create chart
-function updateChart() {
-  // get window for charts
-  const window = document.getElementById("statsWindow");
 
-  // get chosen exercise
-  const selectedExercise = document.getElementById("exerciseStats").value;
-  const data = exerciseData.getExercises(selectedExercise);
 
-  // remove old one if there is
-  let oldChartContainer = document.getElementById("chartContainer");
-  if (oldChartContainer != null) {
-    oldChartContainer.remove();
-  }
+// ---------- initialize components ----------
 
-  // create new canvas
-  let chartContainer = document.createElement("canvas");
-  chartContainer.id = "chartContainer";
-  chartContainer.style.width = "1vw";
-  chartContainer.style.height = "1.2vh";
-  window.appendChild(chartContainer);
+createSelectOptions(exercises);
 
-  // no exercise selected
-  if (data.length === 0) {
-    chartContainer.style.display = "none";
-    return;
-  }
+// initialized data from local storage
+const initRecords = JSON.parse(localStorage.getItem("records"));
+let exerciseData = new ExerciseRecords( (initRecords === null || initRecords._exercises === undefined) ? [] : recreatePrototypes(initRecords._exercises));
+createLogRecords(exerciseData.getExercises('all'));
+console.log(exerciseData.getExercises('all'))
 
-  chartContainer.style.display = "block";
+// load from browser's localStorage data
+const initWorkoutList = JSON.parse(localStorage.getItem("workouts"));
+let workoutList = new WorkoutList( (initWorkoutList === null) ? [] : initWorkoutList._list);
+createWorkouts(workoutList.getWorkoutList());
 
-  // create data for chart
-  let labels = data.map((item) => item.date.toLocaleString());
-  let weights = data.map((item) => item.weight);
 
-  // get 2d drawing context for canvas
-  let ctx = chartContainer.getContext("2d");
 
-  // create chart
-  new Chart(ctx, {
-        type: "line",
-        data: {
-        labels: labels,
-        datasets: [
-            {
-            label: "Weight (kg)",
-            data: weights,
-            borderColor: "rgba(75, 192, 192, 1)",
-            backgroundColor: "rgba(75, 192, 192, 0.2)",
-            borderWidth: 1,
-            },
-        ],
-        },
-        options: {
-        scales: {
-            y: {
-            beginAtZero: true,
-            },
-        },
-        },
-    });
-}

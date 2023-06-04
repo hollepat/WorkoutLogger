@@ -21,10 +21,7 @@ WorkoutList.prototype.removeWorkout = function (workoutName) {
     this._list = newWorkoutList;
 }
 
-// load from browser's localStorage data
-const initWorkoutList = JSON.parse(localStorage.getItem("workouts"));
-let workoutList = new WorkoutList( (initWorkoutList === null) ? [] : initWorkoutList._list);
-createWorkouts(workoutList.getWorkoutList());
+
 
 function saveWorkoutsToLocalStorage() {
     localStorage.setItem("workouts", JSON.stringify(workoutList));
@@ -115,7 +112,15 @@ function togglePopUp() {
         w.style.display = 'none';
     }
     w.style.display = (w.style.display === 'none') ? 'block' : 'none';
-}
+
+    // reset exercises to be filled
+    const divEl = document.querySelector("#exercisesContainer")
+    divEl.innerHTML = ""
+
+    // reset name of exercise
+    const nameEl = document.querySelector(".form-group-pop-up > input");
+    nameEl.value = "";
+} 
 
 function addExercise(event) {
 
