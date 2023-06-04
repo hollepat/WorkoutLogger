@@ -1,7 +1,4 @@
 
-let cnt = 0
-
-
 
 // WorkoutList class using prototype
 let WorkoutList = function(init) {
@@ -24,28 +21,14 @@ WorkoutList.prototype.removeWorkout = function (workoutName) {
     this._list = newWorkoutList;
 }
 
-
-let workoutList = new WorkoutList(
-    [
-        {
-            nameW: 'Legs',
-            exercises : [
-                {exercise: 'Squat', reps: 6, sets: 5},
-                {exercise: 'Bulgarian Split Squat', reps: 6, sets: 5}
-            ]
-        },
-        {
-            nameW: 'Arms',
-            exercises: [
-                {exercise: 'Biceps Curls', reps: 6, sets: 5},
-                {exercise: 'Triceps Extension', reps: 6, sets: 5}
-            ]
-        }
-    ]
-)
-
+// load from browser's localStorage data
+const initWorkoutList = JSON.parse(localStorage.getItem("workouts"));
+let workoutList = new WorkoutList( (initWorkoutList === null) ? [] : JSON.parse(localStorage.getItem("workouts"))._list);
 createWorkouts(workoutList.getWorkoutList());
 
+function saveWorkoutsToLocalStorage() {
+    localStorage.setItem("workouts", JSON.stringify(workoutList));
+}
 
 // create workout in Workout logger screen
 function createWorkouts(workouts) {
@@ -111,6 +94,9 @@ function createWorkouts(workouts) {
 
         container.appendChild(workoutEl)
     }
+
+    // update local storage
+    saveWorkoutsToLocalStorage();
 }
 
 
@@ -228,4 +214,5 @@ function addExercise(event) {
 
     // Close the pop-up
     togglePopUp();
+
   }
