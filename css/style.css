@@ -1,3 +1,16 @@
+
+/* ========== VARIABLES ========== */
+
+:root {
+    --main-color: #274167;
+    --black-color: #161925;
+    --mint-green-color: #CBF7ED;
+    --powder-blue-color: #8EA8C3;
+    --ucla-blue-color: #406E8E;
+}
+
+
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -32,14 +45,15 @@ body {
 h1 {
     font-size: 2rem;
     text-align: center;
-    margin-top: 0;
-    color: #333;
+    margin: 1rem;
+    color: var(--black-color);
+    transform: translateX(-30%);
 }
 
 h2 {
     font-size: 1.6rem;
     font-weight: 800;
-    color: #4caf50;;
+    color: var(--main-color);
 }
 
 .window {
@@ -70,7 +84,7 @@ h2 {
 
 .arrow span {
   display: block;
-  border: solid #333;;
+  border: solid var(--black-color);
   border-width: 0 5px 5px 0;
   width: 1rem;
   height: 1rem;
@@ -112,7 +126,7 @@ h2 {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #333;
+    color: var(--black-color);
 }
 
 
@@ -140,7 +154,7 @@ h2 {
   font-weight: 700;
   width: 100%;
   padding: 8px;
-  background-color: #4caf50;
+  background-color: var(--main-color);
   color: #fff;
   border: 1px solid #fff;
   border-radius: 4px;
@@ -152,11 +166,14 @@ h2 {
     width: 100%;
     padding: 8px;
     background-color: #ffff;
-    color: #4caf50;
-    border: 1px solid #4caf50;
+    color: var(--main-color);
+    border: 1px solid var(--main-color);
     border-radius: 4px;
     cursor: pointer;
   }
+
+
+/* =========== TABLE =========== */
 
 .workout-table {
     font-size: 1rem;
@@ -176,6 +193,8 @@ h2 {
     background-color: #f2f2f2;
 }
 
+/* ========== STATS ========= */
+
 #statsContent {
     display: none;
 }
@@ -186,7 +205,7 @@ h2 {
     height: 300px;
 }
 
-
+/* ========== ROUTINES ========== */
 #workout-container {
     display: flex;
     flex-direction: column;
@@ -216,13 +235,13 @@ h2 {
 
 .logExercise > button {
     width: 3rem;
-    background-color: #333;
+    background-color: var(--black-color);
 }
 
 header > h3 {
     margin: 0;
     font-size: 1.3rem;
-    color: #333;
+    color: var(--black-color);
     text-transform: uppercase;
     cursor: pointer;
 
@@ -267,7 +286,7 @@ header > h3:hover {
 
     font-size: 1rem;
     font-weight: 700;
-    color: #333;
+    color: var(--black-color);
 }
 
 #createWindow button svg {
@@ -282,7 +301,8 @@ header > h3:hover {
 }
 
 hr {
-    border: 1px solid #4caf50;
+    border: 1px solid var(--main-color);
+    ;
     border-bottom: none;
     opacity: 0.3;
     margin: 0.5rem -0.5rem 0.5rem -0.5rem;
@@ -311,17 +331,17 @@ form.exercise-container {
     border-radius: 5px;
     border: solid 1px #f0f0f0;
     padding: 0.2rem 0.6rem 0.2rem 0.6rem;
-    color:#333;
+    color:var(--black-color);
     cursor: pointer;
 }
 
 .pop-up-button:hover {
-    border: solid 1px #333;
+    border: solid 1px var(--black-color);
 }
 
 h4 {
     font-size: 1.2rem;
-    color: #333;
+    color: var(--black-color);
     margin: 0 0.2rem 0.4rem 0;
 }
 
@@ -342,7 +362,7 @@ footer {
     font-size: 0.7rem;
     display: block;
     font-weight: 400;
-    color: #333;
+    color: var(--black-color);
 }
 
 .form-group-pop-up select {
@@ -356,7 +376,7 @@ footer {
 .form-group-pop-up input {
     font-weight: 500;
     font-size: .8rem;
-    color: #333;
+    color: var(--black-color);
     background-color: #fff;
     border-radius: 0.4rem;
     box-shadow: 0 0 0 .15rem rgba(6, 7, 7, 0.186);
@@ -377,7 +397,42 @@ footer {
 }
 
 
-@media (max-width:500px) {
+/* ======== NAV ========= */
+
+nav {
+    width: 100%;
+    background-color: #fff;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 0.7rem;
+}
+
+li {
+    list-style-type: none;
+}
+
+nav ul .nav-item .nav_link {
+    text-decoration: none;
+    color: var(--ucla-blue-color);
+    display: flex;
+    align-items: center;
+}
+
+nav ul .nav-item .nav_link img {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+
+
+
+/* ========= MOBILE VIEW ========== */
+
+@media screen and (max-width:700px) {
     
     html {
         font-size: 14px;
@@ -392,10 +447,10 @@ footer {
     }
 
 
-.form-group-pop-up input {
-    box-shadow: none;
-    border: 1px solid rgba(101, 193, 230, 0.632);
-}
+    .form-group-pop-up input {
+        box-shadow: none;
+        border: 1px solid rgba(101, 193, 230, 0.632);
+    }
 
     
 }
