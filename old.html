@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Workout Logger</title>
+        
+        <link rel="stylesheet" href="css/style.css">
+        
+    </head>
+
+    <body>
+        <main>
+            <header>
+                <h1>Workout Logger</h1>
+            </header>
+
+            <nav>
+                <ul>
+                    <li class="nav-item">
+                        <a href="#routines" class="nav_link">
+                            <img src="images/icon-routines.svg" alt="Routines icon">
+                            <span class="nav_name">Routines</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#logpr" class="nav_link">
+                            <img src="images/icon-logpr.svg" alt="Log PR icon">
+                            <span class="nav_name">Log PR</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#progress" class="nav_link" >
+                            <img src="images/icon-progress.svg" alt="Progress icon">
+                            <span class="nav_name">Progress</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#settings" class="nav_link">
+                            <img src="images/icon-settings.svg" alt="Settings icon">
+                            <span class="nav_name">Settings</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+            
+            <section class="container">
+
+                <!-- Logging Window -->
+                <section class="window active-window" id="logWindow">
+
+                    <!-- Arrow LEFT -->
+                    <div class="arrow arrow-left" onclick="toggleWindow('logWindow', 'createWindow')">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <form id="logExercise">
+
+                        <h2>Log Your Results!</h2>
+                        <!-- Exercise selection -->
+                        <div class="form-group">
+                            <label for="exercise">Exercise:</label>
+                            <select class="exercises" id="exercise" required autofocus>
+                            <!-- options are rendered using js -->
+                            </select>
+                        </div>
+            
+                        <!-- Number of Reps -->
+                        <div class="form-group">
+                            <label for="reps">Reps:</label>
+                            <input type="number" id="reps" placeholder="Enter number of reps">
+                        </div>
+            
+                        <!-- Number of Sets -->
+                        <div class="form-group">
+                            <label for="sets">Sets:</label>
+                            <input type="number" id="sets" placeholder="Enter number of sets">
+                        </div>
+            
+                        <!-- Maximal Weight -->
+                        <div class="form-group">
+                            <label for="weight">Weight (kg):</label>
+                            <input type="number" id="weight" placeholder="Enter weight in kg" required>
+                        </div>
+            
+                        <!-- Log button -->
+                        <div class="form-group">
+                            <button onclick="logWorkout(event)">Log Workout</button>
+                        </div>
+                    </form>
+
+                    <!-- table with logged records of workouts -->
+                    <table class="workout-table">
+                        <thead>
+                        <tr>
+                            <th>Exercise</th>
+                            <th>Reps</th>
+                            <th>Sets</th>
+                            <th>Weight (kg)</th>
+                        </tr>
+                        </thead>
+                        <tbody id="workoutTableBody"></tbody>
+                    </table>
+
+                    <button onclick="deleteAllRecords()" class="pop-up-button">
+                        Clear Records
+                    </button>
+
+                    <div class="arrow arrow-right" onclick="toggleWindow('logWindow', 'statsWindow')">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </section>
+
+                <!-- Workouts Window -->
+                <section class="window" id="createWindow">
+                    <h2>Your Routines!</h2>
+                    
+                    <div id="workout-container">
+                        <!-- here are all the workouts -->
+                    </div>
+
+                    <button id="add-workout-button" onclick="togglePopUp()">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="30px" height="30px" fill-rule="nonzero"><g fill="#23395B" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal">
+                            <g transform="scale(8.53333,8.53333)">
+                                <path d="M15,3c-6.627,0 -12,5.373 -12,12c0,6.627 5.373,12 12,12c6.627,0 12,-5.373 12,-12c0,-6.627 -5.373,-12 -12,-12zM21,16h-5v5c0,0.553 -0.448,1 -1,1c-0.552,0 -1,-0.447 -1,-1v-5h-5c-0.552,0 -1,-0.447 -1,-1c0,-0.553 0.448,-1 1,-1h5v-5c0,-0.553 0.448,-1 1,-1c0.552,0 1,0.447 1,1v5h5c0.552,0 1,0.447 1,1c0,0.553 -0.448,1 -1,1z"></path>
+                            </g></g>
+                        </svg>
+                        Create Workout
+                    </button>
+
+                    <!-- window to add exercise -->
+                    <div id="popup-container">
+                        <header>
+                            <h4>Write down your workout!</h4>
+                            <span class="close-btn" onclick="togglePopUp()">
+                                <svg class="svg-icon" style="width: 1.8em; height: 1.8em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M810.65984 170.65984q18.3296 0 30.49472 12.16512t12.16512 30.49472q0 18.00192-12.32896 30.33088l-268.67712 268.32896 268.67712 268.32896q12.32896 12.32896 12.32896 30.33088 0 18.3296-12.16512 30.49472t-30.49472 12.16512q-18.00192 0-30.33088-12.32896l-268.32896-268.67712-268.32896 268.67712q-12.32896 12.32896-30.33088 12.32896-18.3296 0-30.49472-12.16512t-12.16512-30.49472q0-18.00192 12.32896-30.33088l268.67712-268.32896-268.67712-268.32896q-12.32896-12.32896-12.32896-30.33088 0-18.3296 12.16512-30.49472t30.49472-12.16512q18.00192 0 30.33088 12.32896l268.32896 268.67712 268.32896-268.67712q12.32896-12.32896 30.33088-12.32896z"  />
+                                </svg>
+                            </span>
+                        </header>
+                        <div class="form-group-pop-up">
+                            <label>Name:</label>
+                            <input type="text" name="workout-name">
+                        </div>
+                        <div id="exercisesContainer">
+                            <!-- added using js -->
+                        </div>
+                        <button class="pop-up-button" onclick="addExercise(event)">Add Exercise</button>
+                        <button class="pop-up-button" onclick="saveData()">Save</button>
+                    </div>
+
+                    <!-- Arrow RIGHT -->
+                    <div class="arrow arrow-right" onclick="toggleWindow('createWindow', 'logWindow')">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </section>
+
+                <!-- Statistics Window -->
+                <section class="window" id="statsWindow">
+                    <h2>Statistics</h2>
+                    <!-- Arrow LEFT -->
+                    <div class="arrow arrow-left" onclick="toggleWindow('statsWindow', 'logWindow')">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <!-- Exercise Selection -->
+                    <div class="form-group">
+                        <label for="exerciseStats">Exercise:</label>
+                        <select class="exercises" id="exerciseStats" onchange="updateChart()">
+                        <!-- options are rendered using js -->
+                        </select>
+                    </div>
+
+                    <!-- here is created canvas graph -->
+
+                </section>
+
+            </section>
+            
+        </main>
+        
+
+        <!-- <footer>
+            <p>Created by Patrik Holler</p>
+        </footer> -->
+
+        <!-- javascript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script> 
+        <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+        <script src="js/statsWindow.js"></script>
+        <script src="js/workoutsWindow.js"></script>
+        <script src="js/logWindow.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+
+</html>

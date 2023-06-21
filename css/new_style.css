@@ -1,0 +1,63 @@
+/* ========== VARIABLES ========== */
+
+:root {
+    --main-color: #274167;
+    --black-color: #161925;
+    --mint-green-color: #CBF7ED;
+    --powder-blue-color: #8EA8C3;
+    --ucla-blue-color: #406E8E;
+
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.8;
+    background-color: var(--black-color);
+}
+
+main {
+    display: grid;
+    grid-template-areas: 
+    "header nav nav nav nav"
+    "content content content content content";
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    grid-column: 1/2;
+    grid-row: 1/1;
+}
+
+h2 {
+    color: #53719d;
+}
+
+nav {
+    grid-column: 2/6;
+    grid-row: 1/2;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+section.container {
+    grid-column: 1/6;
+    grid-row: 2/3;
+}
+
+
+
+
