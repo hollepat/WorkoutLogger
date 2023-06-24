@@ -74,7 +74,7 @@
     }
 
     nav ul li.active .nav-link img {
-        transform: translateY(-100%);
+        transform: translateY(-25%);
     }
 
     nav ul li .nav-link .nav-name {
@@ -90,13 +90,13 @@
 
     nav ul li.active .nav-link .nav-name {
         opacity: 1;
-        transform: translateY(20px);
+        transform: translateY(25px);
     }
 
-    .indicator {
+    /* .indicator {
         position: absolute;
         bottom: 40px;
-        left: 4vw;
+        left: 35px;
         width: 70px;
         height: 70px;
         border-radius: 50%;
@@ -134,14 +134,43 @@
     }
 
     nav ul li:nth-child(2).active ~ .indicator {
-        transform: translateX(calc(22.8vw*1));
+        transform: translateX(calc(70px*1));
     }
 
     nav ul li:nth-child(3).active ~ .indicator {
-        transform: translateX(calc(22.8vw*2));
+        transform: translateX(calc(70px*2));
     }
 
     nav ul li:nth-child(4).active ~ .indicator {
-        transform: translateX(calc(22.8vw*3));
+        transform: translateX(calc(70px*3));
+    } */
+
+    /* ========== routines ========== */
+
+    #routines-window #routines-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        justify-content: center;
+        align-items: center;
+        column-gap: 10px;
+        row-gap: 10px;
+    }
+
+    #routines-window #routines-container .routine {
+        background-color: var(--ghost-white-color);
+        border-radius: 10px;
+        border: solid 2px var(--black-color);
+    }
+
+    #routines-window #routines-container .routine:hover {
+        border: solid 2px var(--powder-blue-color);
+
+    }
+
+    #routines-window #routines-container .routine p {
+        font-size: 0.8em;
+        padding: 0.3rem;
+        text-align: center;
     }
 }
