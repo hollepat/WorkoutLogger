@@ -20,25 +20,25 @@
             <nav>
                 <ul>
                     <li class="nav-item active">
-                        <a href="#routines" class="nav-link">
+                        <a href="#routines" class="nav-link" onclick="displayRoutineWindow()">
                             <img src="images/icon-routines.svg" alt="Routines icon">
                             <span class="nav-name">Routines</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#logpr" class="nav-link">
+                        <a href="#logpr" class="nav-link" onclick="displayLogWindow()">
                             <img src="images/icon-logpr.svg" alt="Log PR icon">
                             <span class="nav-name">Log PR</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#progress" class="nav-link" >
+                        <a href="#progress" class="nav-link" onclick="displayStatsWindow()">
                             <img src="images/icon-progress.svg" alt="Progress icon">
                             <span class="nav-name">Progress</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#settings" class="nav-link">
+                        <a href="#settings" class="nav-link" onclick="displaySettingWindow()">
                             <img src="images/icon-settings.svg" alt="Settings icon">
                             <span class="nav-name">Settings</span>
                         </a>
@@ -53,15 +53,15 @@
                     
                     <div id="routines-container">
                         <!-- here are all the workouts -->
-                        <div class="routine">
-                            <p class="routine-name">Legs</p>
-                        </div>
-                        <div class="routine">
-                            <p class="routine-name">Arms</p>
-                        </div>
-                        <div class="routine">
-                            <p class="routine-name">Back and Shoulders</p>
-                        </div>
+                        <button class="routine">
+                            <h3 class="routine-name">Legs</h3>
+                        </button>
+                        <button class="routine">
+                            <h3 class="routine-name">Arms</h3>
+                        </button>
+                        <button class="routine">
+                            <h3 class="routine-name">Back and Shoulders</h3>
+                        </button>
                     </div>
 
                 </section>
@@ -77,10 +77,13 @@
         <!-- javascript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script> 
         <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
-        <script src="js/statsWindow.js"></script>
-        <script src="js/workoutsWindow.js"></script>
+        <script src="js/new-main.js"></script>
+        <script src="js/routineWindow.js"></script>
         <script src="js/logWindow.js"></script>
-        <script src="js/main.js"></script>
+        <script src="js/statsWindow.js"></script>
+        <script src="js/setting.js"></script>
+        <!-- <script src="js/workoutsWindow.js"></script>
+        <script src="js/main.js"></script> --> 
     </body>
 
 </html>

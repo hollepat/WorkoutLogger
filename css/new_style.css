@@ -20,7 +20,7 @@ html {
     font-size: 18px;
     font-family: 'Poppins', sans-serif;
     line-height: 1.8;
-    background-color: var(--black-color);
+    background-color: ghostwhite;
 }
 
 main {
@@ -38,7 +38,9 @@ h1 {
 }
 
 h2 {
-    color: #53719d;
+    color: var(--ucla-blue-color);
+    font-weight: 900;
+    letter-spacing: -1px;
 }
 
 nav {
@@ -56,6 +58,7 @@ nav ul {
 section.container {
     grid-column: 1/6;
     grid-row: 2/3;
+    margin: 1rem;
 }
 
 

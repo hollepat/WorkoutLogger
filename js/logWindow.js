@@ -151,3 +151,25 @@ function logWorkout(event) {
     // update chart
     updateChart();
 }
+
+
+// new
+
+function displayLogWindow() {
+    // get window container
+    const windowEl = document.querySelector('.window-container')
+    windowEl.innerHTML = ''
+    
+    // Window for Routines content
+    const sectionElWindow = document.createElement('section')
+    sectionElWindow.classList.add('window')
+    sectionElWindow.id = 'log-window'
+
+    // Heading
+    const h2El = document.createElement('h2')
+    h2El.innerText = "Log Your Crazy PR's!!!"
+
+    // append to html
+    sectionElWindow.appendChild(h2El)
+    windowEl.appendChild(sectionElWindow)
+}

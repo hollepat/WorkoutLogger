@@ -59,3 +59,24 @@ function updateChart() {
           },
       });
   }
+
+// new
+
+function displayStatsWindow() {
+    // get window container
+    const windowEl = document.querySelector('.window-container')
+    windowEl.innerHTML = ''
+    
+    // Window for Routines content
+    const sectionElWindow = document.createElement('section')
+    sectionElWindow.classList.add('window')
+    sectionElWindow.id = 'stats-window'
+
+    // Heading
+    const h2El = document.createElement('h2')
+    h2El.innerText = "Check the progress, beast!"
+
+    // append to html
+    sectionElWindow.appendChild(h2El)
+    windowEl.appendChild(sectionElWindow)
+}
