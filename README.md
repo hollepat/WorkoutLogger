@@ -15,10 +15,10 @@ All can be accessed through any __browser__, therefore you can __use this app on
 ---
 
 ## Log Workouts!
-![Log exercises screen]()
+![Log exercises screen](screenshots/logs-screenshot.png)
 
 ## Create personalized workout sessions!
-![Screen with sessions]()
+![Screen with sessions](screenshots/routines-screenshot.png)
 
 ## See your progress over time!
-![Statistics screen]()
+![Statistics screen](screenshots/stats-screenshot.png)
