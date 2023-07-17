@@ -1,345 +1,169 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 
-  <head>
-    <title>Workout Logger</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f2f2f2;
-        margin: 0;
-        padding: 0;
-      }
-      .container {
-        max-width: 600px;
-        margin: 20px auto;
-        background-color: #fff;
-        padding: 20px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-        position: relative;
-      }
-      .window {
-        display: none;
-      }
-      .active-window {
-        display: block;
-      }
-      .navigation {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 30px;
-        height: 30px;
-        background-color: #ccc;
-        border-radius: 50%;
-        text-align: center;
-        line-height: 30px;
-        font-size: 20px;
-        cursor: pointer;
-      }
-      .navigation-left {
-        left: -15px;
-      }
-      .navigation-right {
-        right: -15px;
-      }
-      h1 {
-        text-align: center;
-        margin-top: 0;
-        color: #333;
-      }
-      .form-group {
-        margin-bottom: 10px;
-      }
-      .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-        color: #333;
-      }
-      .form-group input[type="text"],
-      .form-group input[type="number"],
-      .form-group select {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
-      .form-group select {
-        height: 34px;
-      }
-      .form-group button {
-        display: block;
-        width: 100%;
-        padding: 8px;
-        background-color: #4caf50;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-      .workout-table {
-        margin-top: 20px;
-        width: 100%;
-        border-collapse: collapse;
-      }
-      .workout-table th,
-      .workout-table td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        text-align: left;
-      }
-      .workout-table th {
-        background-color: #f2f2f2;
-      }
-      #statsContent {
-        display: none;
-      }
-      #chartContainer {
-        margin-top: 20px;
-        width: 100%;
-        height: 300px;
-      }
-    </style>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Workout Logger</h1>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Workout Logger</title>
+        <link rel="stylesheet" href="style.css">
 
-      <div class="window active-window" id="logWindow">
-        <div class="form-group">
-          <label for="exercise">Exercise:</label>
-          <select id="exercise" placeholder="Select exercise">
-            <option value>Select exercise</option>
-            <option value="exercise1">Exercise 1</option>
-            <option value="exercise2">Exercise 2</option>
-            <option value="exercise3">Exercise 3</option>
-          </select>
-        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script> 
+        <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+    </head>
 
-        <div class="form-group">
-          <label for="reps">Reps:</label>
-          <input type="number" id="reps" placeholder="Enter number of reps" />
-        </div>
+    <body>
+        <section class="container">
+            <header>
+            <h1>Workout Logger</h1>
+            </header>
 
-        <div class="form-group">
-          <label for="sets">Sets:</label>
-          <input type="number" id="sets" placeholder="Enter number of sets" />
-        </div>
+            <!-- Logging Window -->
+            <section class="window active-window" id="logWindow">
 
-        <div class="form-group">
-          <label for="weight">Weight (kg):</label>
-          <input type="number" id="weight" placeholder="Enter weight in kg" />
-        </div>
+                <!-- Arrow LEFT -->
+                <div class="arrow arrow-left" onclick="toggleWindow('logWindow', 'createWindow')">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
 
-        <div class="form-group">
-          <button onclick="logWorkout()">Log Workout</button>
-        </div>
+                <form id="logExercise">
 
-        <table class="workout-table">
-          <thead>
-            <tr>
-              <th>Exercise</th>
-              <th>Reps</th>
-              <th>Sets</th>
-              <th>Weight (kg)</th>
-            </tr>
-          </thead>
-          <tbody id="workoutTableBody"></tbody>
-        </table>
-
-        <div
-          class="navigation navigation-right"
-          onclick="toggleWindow('logWindow', 'statsWindow')">
-          &rarr;
-        </div>
-      </div>
-
-      <!-- New createWindow -->
-      <div class="window" id="createWindow">
-        <div class="form-group">
-          <label for="workoutName">Workout Name:</label>
-          <input type="text" id="workoutName" placeholder="Enter workout name" />
-        </div>
-
-        <div class="form-group">
-          <label for="exerciseName">Exercise Name:</label>
-          <input type="text" id="exerciseName" placeholder="Enter exercise name" />
-        </div>
-
-        <div class="form-group">
-          <label for="exerciseSets">Sets:</label>
-          <input type="number" id="exerciseSets" placeholder="Enter number of sets" />
-        </div>
-
-        <div class="form-group">
-          <label for="exerciseReps">Reps:</label>
-          <input type="number" id="exerciseReps" placeholder="Enter number of reps" />
-        </div>
-
-        <div class="form-group">
-          <label for="exercisePR">Percentage of Max PR:</label>
-          <input type="number" id="exercisePR" placeholder="Enter percentage of max PR" />
-        </div>
-
-        <div class="form-group">
-          <button onclick="createWorkout()">Create Workout</button>
-        </div>
-
-        <table class="workout-table">
-          <thead>
-            <tr>
-              <th>Workout Name</th>
-              <th>Exercise Name</th>
-              <th>Sets</th>
-              <th>Reps</th>
-              <th>Percentage of Max PR</th>
-            </tr>
-          </thead>
-          <tbody id="workoutTableBody"></tbody>
-        </table>
-
-        <div
-          class="navigation navigation-right"
-          onclick="toggleWindow('createWindow', 'statsWindow')">
-          &rarr;
-        </div>
-      </div>
-
-      <div class="window" id="statsWindow">
-        <div class="form-group">
-          <label for="exerciseStats">Exercise:</label>
-          <select id="exerciseStats" onchange="updateChart()">
-            <option value>Select exercise</option>
-            <option value="exercise1">Exercise 1</option>
-            <option value="exercise2">Exercise 2</option>
-            <option value="exercise3">Exercise 3</option>
-          </select>
-        </div>
-
-        <canvas id="chartContainer"></canvas>
-
-        <div
-          class="navigation navigation-left"
-          onclick="toggleWindow('statsWindow', 'logWindow')">
-          &larr;
-        </div>
-      </div>
-    </div>
-
-    <script>
-      var exerciseData = {};
-
-      function logWorkout() {
-        var exercise = document.getElementById("exercise").value;
-        var reps = document.getElementById("reps").value;
-        var sets = document.getElementById("sets").value;
-        var weight = document.getElementById("weight").value;
-
-        var tableBody = document.getElementById("workoutTableBody");
-        var newRow = tableBody.insertRow();
-
-        var exerciseCell = newRow.insertCell();
-        exerciseCell.textContent = exercise;
-
-        var repsCell = newRow.insertCell();
-        repsCell.textContent = reps;
-
-        var setsCell = newRow.insertCell();
-        setsCell.textContent = sets;
-
-        var weightCell = newRow.insertCell();
-        weightCell.textContent = weight;
-
-        if (!exerciseData[exercise]) {
-          exerciseData[exercise] = [];
-        }
-
-        exerciseData[exercise].push({
-          date: new Date(),
-          weight: parseFloat(weight),
-        });
-
-        updateChart();
-      }
-
-      function createWorkout() {
-        var workoutName = document.getElementById("workoutName").value;
-        var exerciseName = document.getElementById("exerciseName").value;
-        var exerciseSets = document.getElementById("exerciseSets").value;
-        var exerciseReps = document.getElementById("exerciseReps").value;
-        var exercisePR = document.getElementById("exercisePR").value;
-
-        var tableBody = document.getElementById("workoutTableBody");
-        var newRow = tableBody.insertRow();
-
-        var workoutNameCell = newRow.insertCell();
-        workoutNameCell.textContent = workoutName;
-
-        var exerciseNameCell = newRow.insertCell();
-        exerciseNameCell.textContent = exerciseName;
-
-        var setsCell = newRow.insertCell();
-        setsCell.textContent = exerciseSets;
-
-        var repsCell = newRow.insertCell();
-        repsCell.textContent = exerciseReps;
-
-        var prCell = newRow.insertCell();
-        prCell.textContent = exercisePR;
+                    <h2>Log Your Results!</h2>
+                    <!-- Exercise selection -->
+                    <div class="form-group">
+                        <label for="exercise">Exercise:</label>
+                        <select class="exercises" id="exercise" autofocus>
+                        <!-- options are rendered using js -->
+                        </select>
+                    </div>
         
-      }
+                    <!-- Number of Reps -->
+                    <div class="form-group">
+                        <label for="reps">Reps:</label>
+                        <input type="number" id="reps" placeholder="Enter number of reps">
+                    </div>
+        
+                    <!-- Number of Sets -->
+                    <div class="form-group">
+                        <label for="sets">Sets:</label>
+                        <input type="number" id="sets" placeholder="Enter number of sets">
+                    </div>
+        
+                    <!-- Maximal Weight -->
+                    <div class="form-group">
+                        <label for="weight">Weight (kg):</label>
+                        <input type="number" id="weight" placeholder="Enter weight in kg">
+                    </div>
+        
+                    <!-- Log button -->
+                    <div class="form-group">
+                        <button onclick="logWorkout(event)">Log Workout</button>
+                    </div>
+                </form>
 
-      function toggleWindow(currentWindow, nextWindow) {
-        var current = document.getElementById(currentWindow);
-        var next = document.getElementById(nextWindow);
+                <!-- table with logged records of workouts -->
+                <table class="workout-table">
+                    <thead>
+                    <tr>
+                        <th>Exercise</th>
+                        <th>Reps</th>
+                        <th>Sets</th>
+                        <th>Weight (kg)</th>
+                    </tr>
+                    </thead>
+                    <tbody id="workoutTableBody"></tbody>
+                </table>
 
-        current.classList.remove("active-window");
-        next.classList.add("active-window");
-      }
+                <button onclick="deleteAllRecords()" class="pop-up-button">
+                    Clear Records
+                </button>
 
-      function updateChart() {
-        var selectedExercise = document.getElementById("exerciseStats").value;
-        var data = exerciseData[selectedExercise] || [];
-        var chartContainer = document.getElementById("chartContainer");
+                <div class="arrow arrow-right" onclick="toggleWindow('logWindow', 'statsWindow')">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </section>
 
-        if (data.length === 0) {
-          chartContainer.style.display = "none";
-          return;
-        }
+            <!-- Workouts Window -->
+            <section class="window" id="createWindow">
+                <h2>Your Routines!</h2>
+                
+                <div id="workout-container">
+                    <!-- here are all the workouts -->
+                </div>
 
-        chartContainer.style.display = "block";
+                <button id="add-workout-button" onclick="togglePopUp()">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="30px" height="30px" fill-rule="nonzero"><g fill="#4caf50" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal">
+                        <g transform="scale(8.53333,8.53333)">
+                            <path d="M15,3c-6.627,0 -12,5.373 -12,12c0,6.627 5.373,12 12,12c6.627,0 12,-5.373 12,-12c0,-6.627 -5.373,-12 -12,-12zM21,16h-5v5c0,0.553 -0.448,1 -1,1c-0.552,0 -1,-0.447 -1,-1v-5h-5c-0.552,0 -1,-0.447 -1,-1c0,-0.553 0.448,-1 1,-1h5v-5c0,-0.553 0.448,-1 1,-1c0.552,0 1,0.447 1,1v5h5c0.552,0 1,0.447 1,1c0,0.553 -0.448,1 -1,1z"></path>
+                        </g></g>
+                    </svg>
+                    Create Workout
+                </button>
 
-        var labels = data.map((item) => item.date.toDateString());
-        var weights = data.map((item) => item.weight);
+                <!-- window to add exercise -->
+                <div id="popup-container">
+                    <header>
+                        <h4>Write down your workout!</h4>
+                        <span class="close-btn" onclick="togglePopUp()">
+                            <svg class="svg-icon" style="width: 1.8em; height: 1.8em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M810.65984 170.65984q18.3296 0 30.49472 12.16512t12.16512 30.49472q0 18.00192-12.32896 30.33088l-268.67712 268.32896 268.67712 268.32896q12.32896 12.32896 12.32896 30.33088 0 18.3296-12.16512 30.49472t-30.49472 12.16512q-18.00192 0-30.33088-12.32896l-268.32896-268.67712-268.32896 268.67712q-12.32896 12.32896-30.33088 12.32896-18.3296 0-30.49472-12.16512t-12.16512-30.49472q0-18.00192 12.32896-30.33088l268.67712-268.32896-268.67712-268.32896q-12.32896-12.32896-12.32896-30.33088 0-18.3296 12.16512-30.49472t30.49472-12.16512q18.00192 0 30.33088 12.32896l268.32896 268.67712 268.32896-268.67712q12.32896-12.32896 30.33088-12.32896z"  />
+                            </svg>
+                        </span>
+                    </header>
+                    <div class="form-group-pop-up">
+                        <label>Name:</label>
+                        <input type="text" name="workout-name">
+                    </div>
+                    <div id="exercisesContainer">
+                        <!-- added using js -->
+                    </div>
+                    <button class="pop-up-button" onclick="addExercise(event)">Add Exercise</button>
+                    <button class="pop-up-button" onclick="saveData()">Save</button>
+                </div>
 
-        var ctx = chartContainer.getContext("2d");
+                <!-- Arrow RIGHT -->
+                <div class="arrow arrow-right" onclick="toggleWindow('createWindow', 'logWindow')">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </section>
 
-        new Chart(ctx, {
-          type: "line",
-          data: {
-            labels: labels,
-            datasets: [
-              {
-                label: "Weight (kg)",
-                data: weights,
-                borderColor: "rgba(75, 192, 192, 1)",
-                backgroundColor: "rgba(75, 192, 192, 0.2)",
-                borderWidth: 1,
-              },
-            ],
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true,
-              },
-            },
-          },
-        });
-      }
-    </script>
-  </body>
+            <!-- Statistics Window -->
+            <section class="window" id="statsWindow">
+                <h2>Statistics</h2>
+                <!-- Arrow LEFT -->
+                <div class="arrow arrow-left" onclick="toggleWindow('statsWindow', 'logWindow')">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <!-- Exercise Selection -->
+                <div class="form-group">
+                    <label for="exerciseStats">Exercise:</label>
+                    <select class="exercises" id="exerciseStats" onchange="updateChart()">
+                    <!-- options are rendered using js -->
+                    </select>
+                </div>
+
+                <!-- here is created canvas graph -->
+
+            </section>
+        </section>
+
+        <footer>
+            <p>Created by Patrik Holler</p>
+        </footer>
+
+        <!-- javascript logic -->
+        <script src="statsWindow.js"></script>
+        <script src="workoutsWindow.js"></script>
+        <script src="logWindow.js"></script>
+        <script src="main.js"></script>
+    </body>
+
 </html>
